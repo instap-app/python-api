@@ -6,8 +6,8 @@ from instapi.model.relation import InstapRelation
 
 
 class InstapDefinition(InstapItem):
-    def __init__(self, slug: str):
-        super().__init__(definition=DEFINITION_SLUG, slug=slug)
+    def __init__(self, ctx: str, slug: str):
+        super().__init__(ctx=ctx, definition=DEFINITION_SLUG, slug=slug)
 
     def create_field_methods(self, slug: str, name: str) -> [InstapMethod]:
         field = InstapField(slug, name)
