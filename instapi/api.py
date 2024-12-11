@@ -1,21 +1,19 @@
-from dataclasses import dataclass, field
-
 import requests
-
 from model.method import InstapMethod
 
 
-@dataclass
 class InstapAPI:
-    endpoint: str
-    token: str
-    command_endpoint: str = field(init=False)
-
-    def __post_init__(self):
+    def __init__(self, endpoint: str, token: str):
+        self.endpoint = endpoint
+        self.token = token
         self.command_endpoint = f"{self.endpoint}/api/write/command"
 
     def post(self, method: InstapMethod):
-        r = requests.post(self.command_endpoint, json=method.json(), headers={"Authorization": f"Bearer {self.token}"})
+        r = requests.post(
+            self.command_endpoint,
+            json=method.json(),
+            headers={"Authorization": f"Bearer {self.token}"}
+        )
         print(f"HTTP:{r.status_code} - POST to {self.command_endpoint} with body: {method.json()}")
 
     def invoke(self, *methods: InstapMethod):
