@@ -1,4 +1,4 @@
-from slugify import slugify
+from instapi.helpers import slugify
 from instapi.model.method import InstapMethod
 
 
