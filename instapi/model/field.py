@@ -4,8 +4,8 @@ from instapi.model.method import InstapMethod
 
 
 class InstapField(InstapItem):
-    def __init__(self, slug: str, name: str):
-        super().__init__(definition=FIELD_SLUG, slug=slug)
+    def __init__(self, ctx: str, slug: str, name: str):
+        super().__init__(ctx=ctx, definition=FIELD_SLUG, slug=slug)
         self.name = name
 
     def create_methods(self) -> [InstapMethod]:
