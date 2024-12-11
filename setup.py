@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="instapi",
-    version="0.3.1",
+    version="0.3.2",
     author="Instap",
     author_email="api@instap.app",
     description="Instap API for Python",
