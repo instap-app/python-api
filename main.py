@@ -1,16 +1,9 @@
-# This is a sample Python script.
+from instapi.api import InstapAPI
+from instapi.model.item import InstapItem
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+API_URL = f"http://address.com/command"
+API_TOKEN = "TOKEN"
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+api = InstapAPI(API_URL, API_TOKEN)
+item = InstapItem("parameter", "test")
+api.invoke(item.create_method())
