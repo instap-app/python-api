@@ -1,5 +1,5 @@
 import requests
-from model.method import InstapMethod
+from instapi.model.method import InstapMethod
 
 
 class InstapAPI:
