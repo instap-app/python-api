@@ -2,7 +2,17 @@
 
 ## Installation
 
+### Python 3.7
+
+With dataclasses backport:
+
 `pip install git+https://github.com/instap-app/python-api`
+
+### Python 3.6
+
+Without dataclasses backport:
+
+`pip install git+https://github.com/instap-app/python-api@python-3.6`
 
 ## Usage
 
