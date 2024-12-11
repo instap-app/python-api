@@ -7,16 +7,18 @@ class InstapItem:
         self.definition = slugify(definition)
         self.slug = slugify(slug)
 
-    def create_method(self) -> InstapMethod:
-        return InstapMethod("CREATE_ITEM", {
+    def create_methods(self) -> [InstapMethod]:
+        m = InstapMethod("CREATE_ITEM", {
             "definition": self.definition,
             "item": self.slug
         })
+        return [m]
 
-    def set_value_method(self, field, value) -> InstapMethod:
-        return InstapMethod("SET_VALUE", {
+    def set_value_method(self, field, value) -> [InstapMethod]:
+        m = InstapMethod("SET_VALUE", {
             "definition": self.definition,
             "item": self.slug,
             "field": field,
             "value": value
         })
+        return [m]

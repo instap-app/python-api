@@ -13,4 +13,7 @@ api = InstapAPI(API_URL, API_TOKEN)
 
 parameterDefinition = InstapDefinition("parameter")
 
-api.invoke_list(parameterDefinition.create_field_methods("min-value"))
+api.invoke(parameterDefinition.create_field_methods("parameter-min-value", "Wartość minimalna"))
+api.invoke(parameterDefinition.create_field_methods("parameter-max-value", "Wartość maksymalna"))
+api.invoke(parameterDefinition.create_field_methods("set-value", "Ustaw wartość"))
+api.invoke(parameterDefinition.create_field_methods("factor", "Ustaw wartość"))
