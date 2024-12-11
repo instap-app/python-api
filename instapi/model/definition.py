@@ -10,6 +10,6 @@ class InstapDefinition(InstapItem):
         super().__init__(ctx=ctx, definition=DEFINITION_SLUG, slug=slug)
 
     def create_field_methods(self, slug: str, name: str) -> [InstapMethod]:
-        field = InstapField(slug, name)
+        field = InstapField(self.ctx, slug, name)
         relation = InstapRelation(field.slug, FIELD_RELATION_TYPE, self.slug)
         return field.create_methods() + relation.create_methods()
