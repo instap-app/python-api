@@ -16,8 +16,12 @@ class InstapAPI:
         )
         print(f"HTTP:{r.status_code} - POST to {self.command_endpoint} with body: {method.json()}")
 
-    def invoke(self, *methods: InstapMethod):
+    def invoke_list(self, methods: [InstapMethod]):
         for method in methods:
             print(f"Invoking {method} on {self.command_endpoint}")
             self.post(method)
         print(f"Invoked {len(methods)} methods on {self.command_endpoint}")
+
+    def invoke(self, *methods: InstapMethod):
+        methods_list = list(methods)
+        self.invoke(methods_list)
