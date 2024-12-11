@@ -1,5 +1,6 @@
 import unicodedata
 import re
+from numbers import Number
 
 
 def slugify(value):
@@ -10,6 +11,10 @@ def slugify(value):
     - Usunięcie diakrytyków (w tym polskich znaków jak 'ł' -> 'l').
     - Usunięcie niedozwolonych znaków.
     """
+
+    if isinstance(value, Number):
+        value = str(value)
+
     # Mapa do ręcznej zamiany polskich znaków na odpowiedniki bez ogonków
     polish_char_map = {
         'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
