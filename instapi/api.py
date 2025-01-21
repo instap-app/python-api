@@ -3,10 +3,11 @@ from instapi.model.method import InstapMethod
 
 
 class InstapAPI:
-    def __init__(self, endpoint: str, token: str):
+    def __init__(self, endpoint: str, token: str, port: int = 80):
         self.endpoint = endpoint
         self.token = token
-        self.command_endpoint = f"{self.endpoint}/api/write/command"
+        self.post = port
+        self.command_endpoint = f"{self.endpoint}:{self.port}/api/write/command"
 
     def post(self, method: InstapMethod):
         r = requests.post(
