@@ -5,7 +5,12 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 class InstapEventListener(ABC):
-    def __init__(self, kafka_config):
+    def __init__(self, address, id):
+        kafka_config = {
+            'bootstrap.servers': address,
+            'group.id': id,
+            'auto.offset.reset': 'earliest'
+        }
         self.kafka_consumer = Consumer(kafka_config)
         self.topic = 'EVENTS'
         self.kafka_consumer.subscribe([self.topic])

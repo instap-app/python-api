@@ -23,10 +23,5 @@ class SimpleEventConsumer(InstapEventListener):
     def on_event(self, event):
         logging.info(f"Consuming event: {event.__dict__}")
 
-kafka_config = {
-    'bootstrap.servers': 'ibombo.rosapp.com:9092',
-    'group.id': 'SimpleEventConsumer',
-    'auto.offset.reset': 'earliest'
-}
-consumer = SimpleEventConsumer(kafka_config)
+consumer = SimpleEventConsumer('dane.imperius.io:9092', 'simple-event-consumer')
 consumer.start_listening()
