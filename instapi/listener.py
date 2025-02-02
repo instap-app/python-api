@@ -2,8 +2,6 @@ from confluent_kafka import Consumer, KafkaError
 import logging
 import json
 
-logging.basicConfig(level=logging.INFO)
-
 class InstapEventListener:
     def __init__(self, address, group_id):
         kafka_config = {
@@ -42,10 +40,10 @@ class InstapEventListener:
                         break
 
                 e = self.parse_event(msg.value().decode('utf-8'))
-                logging.info(f"Received: {e}")
+                # logging.debug(f"Received: {e}")
                 event = e['event']
                 initiator = e['initiator']
-                logging.info(f"Received event: {event} by {initiator}")
+                logging.debug(f"Received event: {event} by {initiator}")
                 if event and event['type'] in self.subscriptions:
                     for handler in self.subscriptions[event['type']]:
                         handler(event)
