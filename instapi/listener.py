@@ -1,3 +1,9 @@
+from confluent_kafka import Consumer, KafkaException
+import logging
+import json
+
+logging.basicConfig(level=logging.INFO)
+
 class InstapEventListener:
     def __init__(self, address, group_id):
         kafka_config = {
