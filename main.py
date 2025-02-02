@@ -7,10 +7,10 @@ from instapi.listener import InstapEventListener
 
 load_dotenv()
 
-# API_URL = os.getenv('API_URL')
-# API_TOKEN = os.getenv('API_TOKEN')
+API_URL = os.getenv('API_URL')
+API_TOKEN = os.getenv('API_TOKEN')
 
-# api = InstapAPI(API_URL, API_TOKEN)
+api = InstapAPI(API_URL, API_TOKEN)
 
 # parameterDefinition = InstapDefinition("parameter")
 
@@ -19,9 +19,22 @@ load_dotenv()
 # api.invoke(parameterDefinition.create_field_methods("set-value", "Ustaw wartość"))
 # api.invoke(parameterDefinition.create_field_methods("factor", "Ustaw wartość"))
 
-class SimpleEventConsumer(InstapEventListener):
-    def on_event(self, event):
-        logging.info(f"Consuming event: {event.__dict__}")
+def handle_ibombo_other_tasks_status_change(event):
+    # Potwierdzenie rozpoczęcia zadania
+    if (event.source_item == "ibombo-task-status-started"):
+        # Konkretne zadanie
+        item = api.read_item("ibombo-other-tasks", event.target_item)
+        recipe = item.get_related_item("ibombo-recipe-2-other-tasks")
+        steps = recipe.get_related_items("ibombo-steps-2-recipe")
+        for step in steps:
+            t = api.create_item("ibombo-other-tasks-steps")
+            t.set_field("ibombo-other-tasks-steps-name", step.get_field("ibombo-steps-name"))
+            t.set_field("ibombo-other-tasks-steps-id", step.slug)
+            t.set_field("ibombo-other-tasks-amount", step.get_field("ibombo-steps-amount"))
+            t.create_relation("ibombo-other-tasks-status-2-other-tasks-steps", "TODO-id-tego-statusu")
+            t.create_relation("ibombo-other-tasks-2-other-tasks-steps", recipe)
+    logging.info(f"Handled CreateRelationSuccessEvent: {event}")
 
-consumer = SimpleEventConsumer('dane.imperius.io:9092', 'simple-event-consumer')
-consumer.start_listening()
+listener = InstapEventListener(address="ibombo.rosapp.com:9092", group_id="ibombo-steps-1")
+listener.subscribe("CreateRelationSuccessEvent", handle_ibombo_other_tasks_status_change)
+listener.start_listening()
