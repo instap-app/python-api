@@ -41,8 +41,11 @@ class InstapEventListener:
                         logging.error(f"Kafka error: {msg.error()}")
                         break
 
-                event = self.parse_event(msg.value().decode('utf-8'))
-                logging.info(f"Received event: {event}")
+                e = self.parse_event(msg.value().decode('utf-8'))
+                logging.info(f"Received: {e}")
+                event = e['event']
+                initiator = e['initiator']
+                logging.info(f"Received event: {event} by {initiator}")
                 if event and event['type'] in self.subscriptions:
                     for handler in self.subscriptions[event['type']]:
                         handler(event)
