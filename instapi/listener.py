@@ -42,6 +42,7 @@ class InstapEventListener:
                         break
 
                 event = self.parse_event(msg.value().decode('utf-8'))
+                logging.info(f"Received event: {event}")
                 if event and event['type'] in self.subscriptions:
                     for handler in self.subscriptions[event['type']]:
                         handler(event)
