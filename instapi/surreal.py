@@ -14,7 +14,7 @@ class InstapSurrealAPI:
 
     def get_one_item(self, definition: str, slug: str):
         # url = f"{self.host}:{self.port}/item/one"
-        url = "http://dane.imperius.io/api/surreal/item/one"
+        url = f"http://{self.host}/api/surreal/item/one"
         params = {
             "definition": definition,
             "item": slug
@@ -24,7 +24,7 @@ class InstapSurrealAPI:
         return response.json()
 
     def get_related_items(self, definition: str, item: str, relation: str):
-        url = "http://dane.imperius.io/api/surreal/item/related"
+        url = f"http://{self.host}/api/surreal/item/related"
         params = {
             "definition": definition,
             "item": item,
