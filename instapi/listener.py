@@ -12,7 +12,7 @@ class InstapEventListener:
             'auto.offset.reset': 'earliest'
         }
         self.kafka_consumer = Consumer(kafka_config)
-        self.topic = 'EVENTS'
+        self.topic = 'events'
         self.kafka_consumer.subscribe([self.topic])
         self.subscriptions = {}
 
