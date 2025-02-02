@@ -1,4 +1,4 @@
-from confluent_kafka import Consumer, KafkaException
+from confluent_kafka import Consumer, KafkaError
 import logging
 import json
 
@@ -35,7 +35,7 @@ class InstapEventListener:
                 if msg is None:
                     continue
                 if msg.error():
-                    if msg.error().code() == KafkaException._PARTITION_EOF:
+                    if msg.error().code() == KafkaError._PARTITION_EOF:
                         continue
                     else:
                         logging.error(f"Kafka error: {msg.error()}")

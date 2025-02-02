@@ -1,5 +1,9 @@
 # Instap Python API
 
+## Requirements
+
+Trzeba dodać do `setup.py/install_requires`
+
 ## Installation
 
 ### Python 3.7
